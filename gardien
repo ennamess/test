@@ -1,0 +1,52 @@
+import rsk
+import time
+import math
+import numpy as np
+import traceback
+c = rsk.Client(host = '127.0.0.1',key='')
+t_ref = time.time()
+
+attaquant = input("robot attaquant : ")
+gardien = input("robot gardien : ")
+cage = input("de quelle coté marqué : ")
+if attaquant == "blue1":
+    A = c.blue1
+elif attaquant == "blue2":
+    A = c.blue2
+elif attaquant == "green1":
+    A = c.green1
+elif attaquant == "green2":
+    A = c.green2
+    
+if gardien == "blue1":
+    C = c.blue1
+elif gardien == "blue2":
+    C = c.blue2
+elif gardien == "green1":
+    C = c.green1
+elif gardien == "green2":
+    C = c.green2
+
+if cage == "droite":
+    cote = 1
+else:
+    cote = -1
+
+x1 = A.position[0]
+y1 = A.position[1]
+xball = c.ball[0]
+yball = c.ball[1]
+
+def equationD():    
+    a,b= np.polyfit((x1,xball), (y1,yball),1)
+    print(a,b)
+    return a,b
+    
+def Y_equation(a,b,x):
+    d = a*(c.ball[0]+x)+b
+    return d
+
+a,b = equationD()
+d = Y_equation(a,b,cote)
+
+C.goto((cote,d,math.pi))
