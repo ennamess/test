@@ -1,0 +1,84 @@
+import rsk
+import time
+import math
+import numpy as np
+import traceback
+c = rsk.Client(host = '127.0.0.1',key='')
+t_ref = time.time()
+
+attaquant = input("robot attaquant : ")
+
+
+if attaquant == "blue1":
+    A = c.blue1
+elif attaquant == "blue2":
+    A = c.blue2
+elif attaquant == "green1":
+    A = c.green1
+elif attaquant == "green2":
+    A = c.green2
+    
+
+K = math.copysign(1,A.position[0])
+
+
+
+x1 = 0.2*K
+y1 = 0
+xball = c.ball[0]
+yball = c.ball[1]
+
+def angle():
+    U1 = math.sqrt((xball-0.2*K)**2+(yball)**2)
+    U2 =  0.2*K-c.ball[0]
+    angle = math.acos(U2/U1)
+    if y1<yball:
+        angle = -angle
+    print(angle)
+    return angle
+
+def equationD():    
+    a,b= np.polyfit((x1,xball), (y1,yball),1)
+    print(a,b)
+    return a,b
+    
+def Y_equation(a,b,x):
+    d = a*(c.ball[0]+x)+b
+    return d
+   
+def force():
+    U1 = math.sqrt((xball-0.2*K)**2+(yball)**2)
+    if U1 > 0.9:
+        return 1
+    elif 0.6<U1<0.9:
+        return 0.75
+    elif  0.25<U1<0.6:
+        return 0.50
+    else:
+        return 0.40
+n = xball-x1
+n2 = yball - y1
+m = math.copysign(1, n)
+m2 = math.copysign(1, n2)
+
+print(m)
+print(m2)
+x = m*0.04
+x2 = m*0.20
+a,b = equationD()
+d = Y_equation(a,b,x)
+d2 = d + 0.20*m2
+angle = angle()
+
+
+
+
+if angle >-2 and angle <-0.9:
+    d = yball+0.04
+elif angle <2 and angle >0.9:
+    d = yball-0.04
+
+    
+A.goto((c.ball[0]+x2,d2,0+angle))
+A.goto((c.ball[0]+x,d,0+angle))
+A.kick(force())
