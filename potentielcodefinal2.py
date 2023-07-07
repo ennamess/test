@@ -22,10 +22,10 @@ if cote == 'g':
     def position_robots():
                     global xg1, yg1, xg2, yg2, xb1, yb1, xb2, yb2
                 
-                    xg1 = c.blue1.position[0]
-                    yg1 = c.blue1.position[1]
-                    xg2 = c.blue2.position[0]
-                    yg2 = c.blue2.position[1]
+                    xg1 = c.green1.position[0]
+                    yg1 = c.green1.position[1]
+                    xg2 = c.green2.position[0]
+                    yg2 = c.green2.position[1]
                     xb1 = c.blue1.position[0]
                     yb1 = c.blue1.position[1]
                     xb2 = c.blue2.position[0]
@@ -235,10 +235,10 @@ else :
     def position_robots():
                     global xg1, yg1, xg2, yg2, xb1, yb1, xb2, yb2
                 
-                    xg1 = c.blue1.position[0]
-                    yg1 = c.blue1.position[1]
-                    xg2 = c.blue2.position[0]
-                    yg2 = c.blue2.position[1]
+                    xg1 = c.green1.position[0]
+                    yg1 = c.green1.position[1]
+                    xg2 = c.green2.position[0]
+                    yg2 = c.green2.position[1]
                     xb1 = c.blue1.position[0]
                     yb1 = c.blue1.position[1]
                     xb2 = c.blue2.position[0]
