@@ -8,7 +8,7 @@ t_ref = time.time()
 
 attaquant = input("robot attaquant : ")
 gardien = input("robot gardien : ")
-cage = input("de quelle coté marqué : ")
+cage = input("de quelle coté : ")
 if attaquant == "blue1":
     A = c.blue1
 elif attaquant == "blue2":
