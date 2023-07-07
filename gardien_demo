@@ -46,7 +46,7 @@ def equationD():
     return a,b
     
 def Y_equation(a,b,x):
-    d = a*(c.ball[0]+x)+b
+    d = a*(x)+b
     return d
 
 a,b = equationD()
